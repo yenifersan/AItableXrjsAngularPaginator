@@ -1,0 +1,18 @@
+table {
+    text-align: center !important;
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .mat-header-cell {
+    text-align: center;
+  }
+  .container {
+    
+    margin-top: 20px;
+    min-height: 100%;
+    width: 50%;
+
+  }
