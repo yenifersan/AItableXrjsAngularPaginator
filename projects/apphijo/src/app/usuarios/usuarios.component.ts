@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { UserService } from '../user.service';
 import { DataSource } from '@angular/cdk/table';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,12 +11,11 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
-
 export class UsuariosComponent implements OnInit {
   MyDataSource: any 
   dataSource = new UsuariosDataSource (this.userService);
   displayedColumns = ['id','name', 'username','email','address']
-  
+
   //pagination
   @ViewChild(MatPaginator) paginator: MatPaginator;  
   @ViewChild(MatSort) sort: MatSort;  
@@ -25,12 +24,8 @@ export class UsuariosComponent implements OnInit {
   constructor(private userService: UserService) { }
   ngOnInit(): void {
     this.RenderDataTable();   
-
-    
   }
-
   RenderDataTable() { 
-     
   this.MyDataSource = this.sort
     this.userService.getUsers()  
       .subscribe(  
@@ -47,7 +42,6 @@ export class UsuariosComponent implements OnInit {
   }  
  }
 
- 
 export class UsuariosDataSource extends DataSource<any>{
   constructor(private userService: UserService) {
     super();

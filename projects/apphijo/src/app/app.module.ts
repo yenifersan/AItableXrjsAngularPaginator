@@ -11,11 +11,13 @@ import { UserService } from './user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { CountButtonComponent } from './count-button/count-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    CountButtonComponent
   ],
   imports: [
     BrowserModule,
