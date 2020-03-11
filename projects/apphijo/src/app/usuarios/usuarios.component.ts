@@ -42,7 +42,7 @@ export class UsuariosComponent implements OnInit {
   email = this.form.get('email');
   address = this.form.get('address');
 
-  cbValues;
+  // cbValues;
 
    /**
    * Control column ordering and which columns are displayed.
