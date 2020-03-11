@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { DataSource } from '@angular/cdk/table';
-import { Observable, from } from 'rxjs';
+import { Observable, from, merge } from 'rxjs';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup, FormControl } from '@angular/forms';
+
+
 
 @Component({
   selector: 'apphijo-usuarios',
@@ -12,16 +15,39 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+
   MyDataSource: any 
   dataSource = new UsuariosDataSource (this.userService);
   displayedColumns = ['id','name', 'username','email','address']
-
   //pagination
   @ViewChild(MatPaginator) paginator: MatPaginator;  
   @ViewChild(MatSort) sort: MatSort;  
+
   //cuando existe un protected inicializado en el construcctor 
   //protected comparte solo con clases que la heredan 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
+ 
+  form:FormGroup = new FormGroup({
+    id: new FormControl(false),
+    name: new FormControl(false),
+    username: new FormControl(false),
+    email: new FormControl(false),
+    address: new FormControl(false)
+  });
+
+  id = this.form.get('id');
+  name = this.form.get('name');
+  username = this.form.get('username');
+  email = this.form.get('email');
+  address = this.form.get('address');
+
+  cbValues;
+
+   /**
+   * Control column ordering and which columns are displayed.
+   */
+
   ngOnInit(): void {
     this.RenderDataTable();   
   }
@@ -40,8 +66,11 @@ export class UsuariosComponent implements OnInit {
         console.log('There was an error while retrieving Albums !!!' + error);  
       });  
   }  
- }
 
+  changeHeaders(){
+    this.displayedColumns= ['id','name', 'username'];
+  }
+ }
 export class UsuariosDataSource extends DataSource<any>{
   constructor(private userService: UserService) {
     super();
@@ -53,6 +82,8 @@ export class UsuariosDataSource extends DataSource<any>{
   }
   disconnect(){}
 }
+
+
     
 
 

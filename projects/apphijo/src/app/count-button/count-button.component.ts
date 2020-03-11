@@ -8,15 +8,16 @@ import { UserService } from '../user.service';
 })
 export class CountButtonComponent implements OnInit {
   @Input() clickCount: number; 
-  
+  num:boolean = false; 
   private count: number = 0;
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+
+    
   }
 
-  onClick() {
-           
+  onClick() {  
   }
 
 
