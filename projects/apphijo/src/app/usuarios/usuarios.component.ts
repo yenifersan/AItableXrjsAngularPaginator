@@ -4,7 +4,7 @@ import { DataSource } from '@angular/cdk/table';
 import { Observable, from, merge } from 'rxjs';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormControl } from '@angular/forms';
 
 
@@ -16,11 +16,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class UsuariosComponent implements OnInit {
 
-  @ViewChild("table",{static:true}) tablita:MatTable<any>; 
-
-  // test: CdkTableDataSourceInput<any>; 
-  MyDataSource: MatTableDataSource<any>;
-  // dataSource = new UsuariosDataSource (this.userService);
+  MyDataSource: MatTableDataSource<any>; 
   displayedColumns = ['id','name', 'username','email','address']
   //pagination
   @ViewChild(MatPaginator) paginator: MatPaginator;  
@@ -45,7 +41,7 @@ export class UsuariosComponent implements OnInit {
   email = this.form.get('email');
   address = this.form.get('address');
 
-  cbValues;
+  // cbValues;
 
    /**
    * Control column ordering and which columns are displayed.
@@ -55,56 +51,25 @@ export class UsuariosComponent implements OnInit {
     this.RenderDataTable();   
   }
   RenderDataTable() { 
-      let arreglo:Array<any>;
-    
-    this.MyDataSource=new MatTableDataSource<any>();
-    this.userService.getUsers().subscribe(
-      (data)=>{
-        this.MyDataSource.data=data;
-      },
-      (error)=>{
-
-      },
-      ()=>{
-        // fin 
-      }
-    );  
-
-
-    // this.MyDataSource = this.sort
-  //   this.userService.getUsers()  
-  //     .subscribe(  
-  //     res => {  
-  //       this.MyDataSource = new MatTableDataSource();  
-  //       this.MyDataSource.data 
-  //       this.MyDataSource.data = res; 
-  //       this.MyDataSource.sort = this.sort;  
-  //       this.MyDataSource.paginator = this.paginator;  
-  //       console.log(this.MyDataSource.data);  
-  //     },  
-  //     error => {  
-  //       console.log('There was an error while retrieving Albums !!!' + error);  
-  //     });  
+ 
+    this.userService.getUsers().subscribe(  
+      data => {  
+        // this.MyDataSource = new MatTableDataSource();  
+        this.MyDataSource.data = data; 
+        // this.MyDataSource.sort = this.sort;  
+        // this.MyDataSource.paginator = this.paginator;  
+        // console.log(this.MyDataSource.data);  
+      },  
+      error => {  
+        console.log('There was an error while retrieving Albums !!!' + error);  
+      });  
   }  
 
   changeHeaders(){
     this.displayedColumns= ['id','name', 'username'];
   }
+ }
 
-//  }
-// export class UsuariosDataSource extends DataSource<any>{
-//   constructor(private userService: UserService) {
-//     super();
-//   }
-//   //es una funcion que devuelve un observable 
-//   //devolvera un observable donde está 
-//   connect(): Observable<any[]>{
-//     return this.userService.getUsers();
-//   }
-//   disconnect(){}
-// }
-
-}
     
 
 
