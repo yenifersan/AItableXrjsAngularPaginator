@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { UsuariosComponent, UsuariosDataSource } from './usuarios/usuarios.component';
+// import { UsuariosComponent, UsuariosDataSource } from './usuarios/usuarios.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CountButtonComponent } from './count-button/count-button.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
