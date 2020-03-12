@@ -16,8 +16,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class UsuariosComponent implements OnInit {
 
-  MyDataSource: any 
-  dataSource = new UsuariosDataSource (this.userService);
+  MyDataSource: MatTableDataSource<any>; 
   displayedColumns = ['id','name', 'username','email','address']
   //pagination
   @ViewChild(MatPaginator) paginator: MatPaginator;  
@@ -42,7 +41,7 @@ export class UsuariosComponent implements OnInit {
   email = this.form.get('email');
   address = this.form.get('address');
 
-  cbValues;
+  // cbValues;
 
    /**
    * Control column ordering and which columns are displayed.
@@ -52,12 +51,11 @@ export class UsuariosComponent implements OnInit {
     this.RenderDataTable();   
   }
   RenderDataTable() { 
-  this.MyDataSource = this.sort
-    this.userService.getUsers()  
-      .subscribe(  
-      res => {  
+ 
+    this.userService.getUsers().subscribe(  
+      data => {  
         this.MyDataSource = new MatTableDataSource();  
-        this.MyDataSource.data = res; 
+        this.MyDataSource.data = data; 
         this.MyDataSource.sort = this.sort;  
         this.MyDataSource.paginator = this.paginator;  
         console.log(this.MyDataSource.data);  
@@ -71,18 +69,6 @@ export class UsuariosComponent implements OnInit {
     this.displayedColumns= ['id','name', 'username'];
   }
  }
-export class UsuariosDataSource extends DataSource<any>{
-  constructor(private userService: UserService) {
-    super();
-  }
-  //es una funcion que devuelve un observable 
-  //devolvera un observable donde está 
-  connect(): Observable<any[]>{
-    return this.userService.getUsers();
-  }
-  disconnect(){}
-}
-
 
     
 
